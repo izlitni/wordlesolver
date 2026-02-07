@@ -41,8 +41,13 @@ function init() {
     // For performance, we might just hardcode the first one or ask user to click calculate
     topPicksList.innerHTML = '<div class="loading-state">Type a word or click Calculate to see suggestions.</div>';
     
-    // Show welcome modal
-    showWelcomeModal();
+    // Show welcome modal ONLY if not seen before
+    const hasSeenWelcome = localStorage.getItem('wordleAnalyzerCompletedWelcome');
+    if (!hasSeenWelcome) {
+        showWelcomeModal();
+        localStorage.setItem('wordleAnalyzerCompletedWelcome', 'true');
+    }
+    
     updateProgressBar();
 }
 
@@ -179,6 +184,9 @@ function setupEventListeners() {
     // Show remaining words button
     document.getElementById('show-words-btn').addEventListener('click', showRemainingWords);
     
+    // Help button
+    document.getElementById('help-btn').addEventListener('click', showWelcomeModal);
+    
     // Progress Bar Toggles
     const progressContainer = document.getElementById('progress-container');
     const showProgressBtn = document.getElementById('show-progress-btn');
@@ -224,6 +232,33 @@ function setupEventListeners() {
     guessInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             handleSubmit();
+        }
+    });
+
+    // Global Key Listener for typing without focus
+    document.addEventListener('keydown', (e) => {
+        // If user is already focused on input or Ctrl/Alt/Meta is pressed, ignore
+        if (document.activeElement === guessInput || e.ctrlKey || e.altKey || e.metaKey) return;
+
+        // Enter key
+        if (e.key === 'Enter') {
+            handleSubmit();
+            return;
+        }
+
+        // Backspace
+        if (e.key === 'Backspace') {
+            guessInput.value = guessInput.value.slice(0, -1);
+            return;
+        }
+
+        // Letters A-Z
+        if (/^[a-zA-Z]$/.test(e.key)) {
+            if (guessInput.value.length < 5) {
+                guessInput.value += e.key;
+            }
+            // Trigger input event manually to update grid
+            guessInput.dispatchEvent(new Event('input'));
         }
     });
 }
