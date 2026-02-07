@@ -11,13 +11,7 @@
 </head>
 <body>
     <div id="app">
-        <div class="progress-container" id="progress-container">
-            <div class="progress-track">
-                <div class="progress-bar" id="progress-bar"></div>
-            </div>
-            <div class="progress-text" id="progress-text">0%</div>
-            <button id="close-progress-btn" class="close-progress" title="Hide Progress Bar">&times;</button>
-        </div>
+    <div id="app">
         <header>
             <h1>Wordle Solver <span class="subtitle">Information Theory</span></h1>
             <div class="controls">
@@ -74,6 +68,18 @@
                 </div>
             </section>
         </main>
+    </div>
+    
+    <!-- Progress Bar (Bottom) -->
+    <div class="progress-container" id="progress-container">
+        <div class="progress-track">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="progress-text-group">
+            <span class="progress-label">SOLVED</span>
+            <span class="progress-percent" id="progress-text">0%</span>
+        </div>
+        <button id="close-progress-btn" class="close-progress" title="Hide Progress Bar">&times;</button>
     </div>
     
     <!-- Modal -->
