@@ -1,20 +1,24 @@
 :root {
-    --bg-color: #0a0a0f;
-    --bg-gradient: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-    --card-bg: rgba(26, 26, 46, 0.6);
-    --glass-bg: rgba(255, 255, 255, 0.05);
+    /* Wordle Dark Theme */
+    --bg-color: #121213;
+    --bg-gradient: linear-gradient(135deg, #121213 0%, #000000 100%);
+    --card-bg: rgba(18, 18, 19, 0.7);
+    --glass-bg: rgba(255, 255, 255, 0.03);
     --glass-border: rgba(255, 255, 255, 0.1);
-    --text-primary: #f0f0f5;
-    --text-secondary: #b0b0c0;
-    --accent-color: #7CD1D1;
-    /* 3b1b Teal */
-    --accent-hover: #5cb8b8;
-    --accent-glow: rgba(124, 209, 209, 0.3);
+
+    --text-primary: #ffffff;
+    --text-secondary: #818384;
+
+    --accent-color: #538d4e;
+    /* Wordle Green */
+    --accent-hover: #467642;
+    --accent-glow: rgba(83, 141, 78, 0.4);
+
     --border-color: rgba(255, 255, 255, 0.1);
 
-    --green: #6aaa64;
-    --yellow: #c9b458;
-    --grey: #787c7e;
+    --green: #538d4e;
+    --yellow: #b59f3b;
+    --grey: #3a3a3c;
 
     --font-ui: 'Outfit', -apple-system, sans-serif;
     --font-mono: 'Space Mono', 'Courier New', monospace;
