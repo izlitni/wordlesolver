@@ -43,6 +43,39 @@ function init() {
     
     // Show welcome modal
     showWelcomeModal();
+    updateProgressBar();
+}
+
+function updateProgressBar() {
+    const total = POSSIBLE_WORDS.length;
+    const current = possibleWords.length;
+    
+    // Calculate percentage eliminated
+    // If current == total, 0% complete
+    // If current == 1, 100% complete
+    
+    let percentage = 0;
+    if (current === 1) {
+        percentage = 100;
+    } else {
+        percentage = ((total - current) / (total - 1)) * 100;
+    }
+    
+    // Clamp
+    percentage = Math.max(0, Math.min(100, percentage));
+    
+    const bar = document.getElementById('progress-bar');
+    const text = document.getElementById('progress-text');
+    
+    bar.style.width = `${percentage}%`;
+    
+    if (current === 1) {
+        text.textContent = `100%`;
+        bar.style.background = 'var(--green)';
+    } else {
+        text.textContent = `${percentage.toFixed(0)}%`;
+        bar.style.background = ''; // Reset to default gradient
+    }
 }
 
 // Modal System
@@ -146,6 +179,20 @@ function setupEventListeners() {
     // Show remaining words button
     document.getElementById('show-words-btn').addEventListener('click', showRemainingWords);
     
+    // Progress Bar Toggles
+    const progressContainer = document.getElementById('progress-container');
+    const showProgressBtn = document.getElementById('show-progress-btn');
+    
+    document.getElementById('close-progress-btn').addEventListener('click', () => {
+        progressContainer.classList.add('hidden');
+        showProgressBtn.classList.remove('hidden');
+    });
+    
+    document.getElementById('show-progress-btn').addEventListener('click', () => {
+        progressContainer.classList.remove('hidden');
+        showProgressBtn.classList.add('hidden');
+    });
+
     document.getElementById('reset-btn').addEventListener('click', () => {
         currentGuessIndex = 0;
         currentGuessChars = [];
@@ -154,8 +201,9 @@ function setupEventListeners() {
         guessInput.disabled = false;
         createGrid();
         updateStats();
-        topPicksList.innerHTML = '';
-        chartContainer.innerHTML = '';
+        updateProgressBar();
+        topPicksList.innerHTML = '<div class="loading-state">Click Calculate to see suggestions.</div>';
+        document.getElementById('distribution-chart').innerHTML = '<div class="chart-placeholder">Select a word to see distribution</div>';
     });
 
     document.getElementById('submit-btn').addEventListener('click', handleSubmit);
@@ -274,6 +322,7 @@ function handleSubmit() {
     }
     
     updateStats();
+    updateProgressBar();
     
     // Move to next
     currentGuessIndex++;
