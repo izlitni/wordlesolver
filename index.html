@@ -11,9 +11,17 @@
 </head>
 <body>
     <div id="app">
+        <div class="progress-container" id="progress-container">
+            <div class="progress-track">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <div class="progress-text" id="progress-text">0%</div>
+            <button id="close-progress-btn" class="close-progress" title="Hide Progress Bar">&times;</button>
+        </div>
         <header>
             <h1>Wordle Solver <span class="subtitle">Information Theory</span></h1>
             <div class="controls">
+                <button id="show-progress-btn" class="btn secondary hidden" title="Show Progress Bar">📊</button>
                 <button id="reset-btn" class="btn secondary">Reset</button>
             </div>
         </header>
